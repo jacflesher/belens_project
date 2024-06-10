@@ -18,44 +18,44 @@
 
 ### Provision the new VM in VirtualBox using the ISO image
 
-    1. make sure to change network adapter to bridged so that the VM gets its own IP
+1. make sure to change network adapter to bridged so that the VM gets its own IP
 
 ### Configure the VM
 
-    1. Update apt and Install sudo
+1. Update apt and Install sudo
     ```bash
     su - root
     apt-get update
     apt-get install sudo
     ```
 
-    1. While still root, add yourself to sudoers list
+1. While still root, add yourself to sudoers list
     ```bash
     tee -a /etc/sudoers <<< "user1 ALL=(ALL:ALL) ALL"
     ```
     (Where "user1" is the user ID to give sudo access)
 
-    1. Exit root session
+1. Exit root session
     ```bash
     exit
     ```
 
-    1. Test sudo access of your user ID
+1. Test sudo access of your user ID
     ```bash
     sudo su -
     ```
 
-    1. Install all other packages
+1. Install all other packages
     ```
     sudo apt-get install -y curl vim cron ssh ldap-utils git net-tools dnsutils jq
     ```
 
-    1. Configure SSL certs
+1. Configure SSL certs
     ```
     ssh-keygen
     ```
 
-    1. Using scp, get the private key to your local, or if the key was created in local, scp the public cert to the vm and then 
+1. Using scp, get the private key to your local, or if the key was created in local, scp the public cert to the vm and then 
     
     from local
     ```
@@ -68,7 +68,7 @@
     cat id_rsa.pub > ~/.ssh/authorized_keys
     ```
 
-    1. Build local config file at ~/.ssh/config
+1. Build local config file at ~/.ssh/config
     ```
     Host debian
         Hostname 1.2.3.4
@@ -77,34 +77,34 @@
         ForwardAgent
     ```
 
-    1. Test that you can log into the vm without entering password, just using your ssl certs
+1. Test that you can log into the vm without entering password, just using your ssl certs
     ```
     ssh user1@1.2.3.4
     ```
 
-    1. If successful, at this point we can shut down the vm and set up headless mode
+1. If successful, at this point we can shut down the vm and set up headless mode
 
 
 ### Configure VM headless mode
 
-    1. Find the name of the VM
+1. Find the name of the VM
     ```
     C:\Users> cd "%programfiles%/Oracle/VirtualBox"
     C:\Program Files\Oracle\VirtualBox> vboxmanage list vms
     "debian01" {f0141d2a-1dd3-4f54-856c-d3dfe1879d82}
     ```
 
-    1. Start the VM as headless so that it runs in the background and you don't need to keep virtualbox open all the time
+1. Start the VM as headless so that it runs in the background and you don't need to keep virtualbox open all the time
     ```
     C:\Program Files\Oracle\VirtualBox> VBoxManage startvm "debian01" --type headless
     ```
 
-    1. Now you can log in using SSH again
+1. Now you can log in using SSH again
     ```
     C:\Program Files\Oracle\VirtualBox> ssh user1@1.2.3.4
     ```
 
-    1. To stop the VM, you can log into the VM and do 
+1. To stop the VM, you can log into the VM and do 
     ```
     sudo halt
     ```
